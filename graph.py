@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, overload
 import sys
 
 class Vertex:
@@ -14,6 +14,8 @@ class Edge:
 class Graph:
     def __init__(self):
         self.graphmap = {}
+        self.bidirectional = self.addDoubleEdge
+        self.monodirectional = self.addEdge
 
     @classmethod
     def from_matrix(cls, mat):
@@ -48,15 +50,27 @@ class Graph:
             print(f"> {vertex.name}", file=file)
             print("\n".join(["-> " + edge.dest.name+ f": {edge.weight}" for edge in vertex.edges]), file=file)
 
-    def addEdge(self, source, dest, weight):
-        v = self.getVertex(source)
-        w = self.getVertex(dest)
-        e: Edge = Edge(weight, w)
-        print(v.name)
-        print(w.name)
-        print(e.dest.name)
-        print("_")
-        v.edges.append(e)
+
+    @overload
+    def addEdge(self, source, dest, weight):...
+
+    @overload
+    def addEdge(self, vertex: Vertex, edge: Edge):...
+
+    def addEdge(self, *args):
+        if len(args) == 2:
+            v, w = args
+            v.edges.append(w)
+        else:
+            source, dest, weight = args
+            v = self.getVertex(source)
+            w = self.getVertex(dest)
+            e: Edge = Edge(weight, w)
+            print(v.name)
+            print(w.name)
+            print(e.dest.name)
+            print("_")
+            v.edges.append(e)
         
     def addDoubleEdge(self, source, dest, weight):
         v = self.getVertex(source)

@@ -6,7 +6,8 @@ def dijkstra(g: Graph, start: Vertex):
     The Dijkstra Algorithm is - as of now - the best Pathfinding Algorithm we have,
     finding the shortest path to every point from one starting vertex.
 
-    
+    -- g: graph.Graph : A Graph() Instance the Algorithm is supposed to be applied on
+    -- start: graph.Vertex : A Vertex() Instance that's on g and acts as the start point
     """
     p = []
     for _,v in g.graphmap.items():
@@ -26,6 +27,8 @@ def dijkstra(g: Graph, start: Vertex):
             if w.dist > v.dist + c:
                 w.dist = v.dist + c
                 w.prev = v
-                p.append(Edge(w.dist, w))
+                t = Edge(w.dist, w)
+                g.addEdge(v, t)
+                p.append(t)
 
     return g
