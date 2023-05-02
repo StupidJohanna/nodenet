@@ -16,6 +16,7 @@ class Graph:
         self.graphmap = {}
         self.bidirectional = self.addDoubleEdge
         self.monodirectional = self.addEdge
+        self.getVertexOrCreateNew = self.getVertex
 
     @classmethod
     def from_matrix(cls, mat):

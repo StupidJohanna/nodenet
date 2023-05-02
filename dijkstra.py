@@ -10,11 +10,14 @@ def dijkstra(g: Graph, start: Vertex):
     -- start: graph.Vertex : A Vertex() Instance that's on g and acts as the start point
     """
     p = []
+    dist = Graph()
     for _,v in g.graphmap.items():
         v.dist = sys.float_info.max
         v.seen = False
         v.prev = None
     start.dist = 0
+    dist = g
+    dist.monodirectional(Vertex("."), Edge(0,start))
     p.append(Edge(0,start))
     while p:
         best = p.pop()
@@ -28,7 +31,7 @@ def dijkstra(g: Graph, start: Vertex):
                 w.dist = v.dist + c
                 w.prev = v
                 t = Edge(w.dist, w)
-                g.addEdge(v, t)
+                dist.monodirectional(v, t)
                 p.append(t)
 
-    return g
+    return dist
