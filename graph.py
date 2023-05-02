@@ -17,7 +17,24 @@ class Graph:
 
     @classmethod
     def from_matrix(cls, mat):
+        """
+        Create a Graph from an adjacency Matrix.
+
+        A Matrix is here represented as a list of Lists of Floats.
+        For a bidirectional, unweighed graph it could look like this
+
+        [
+            [0,1,0,0,0],
+            [1,0,1,1,1],
+            [0,1,0,0,0],
+            [0,1,0,0,0],
+            [0,1,0,0,0]
+        ]
+
+        Creating a Graph from a Matrix automatically forbids the use of Labels for the Vertices
+
         
+        """
         for n,i in enumerate(mat):
             for x,j in enumerate(i):
                 cls.getVertex(x)

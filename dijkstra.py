@@ -1,9 +1,12 @@
 from graph import Graph, Edge, Vertex
 import sys
 
-def compute(g: Graph, start: Vertex):
+def dijkstra(g: Graph, start: Vertex):
     """
-    Executes the Dijsktra Algorithm on graph g
+    The Dijkstra Algorithm is - as of now - the best Pathfinding Algorithm we have,
+    finding the shortest path to every point from one starting vertex.
+
+    
     """
     p = []
     for _,v in g.graphmap.items():
